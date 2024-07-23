@@ -1,0 +1,14 @@
+# Ignorar arquivos e diretórios gerados pelo Maven
+target/
+test/
+
+# Outros arquivos comuns a serem ignorados
+*.log
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+.DS_Store
+.vscode/
+out/
