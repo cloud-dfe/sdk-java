@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
     <name>SDK Cloud DFE</name>
-    <description>Uma biblioteca Java para integração com o serviço Cloud Dfe.</description>
+    <description>Uma biblioteca Java para integração com o API da Integra Notas</description>
 
     <!-- Dependências -->
     <dependencies>
