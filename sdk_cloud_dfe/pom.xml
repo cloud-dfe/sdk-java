@@ -13,12 +13,6 @@
     <name>SDK Cloud DFE</name>
     <description>Uma biblioteca Java para integração com o API da Integra Notas</description>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-    </properties>
-
     <!-- Dependências -->
     <dependencies>
         <dependency>
@@ -36,17 +30,28 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin para criar o JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Built-By>${user.name}</Built-By>
+                            <Built-JDK>${maven.compiler.source}</Built-JDK>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <!-- Configurações de distribuição do pacote -->
-    </distributionManagement>
 
 </project>
