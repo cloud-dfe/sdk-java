@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.sdk</groupId>
+    <groupId>io.github.cloud-dfe</groupId>
     <artifactId>sdk-cloud-dfe</artifactId>
     <version>1.0.0</version>
 
@@ -37,7 +37,7 @@
     <scm>
         <connection>scm:git:git://github.com/cloud-dfe/sdk-java.git</connection>
         <developerConnection>scm:git:ssh://github.com/cloud-dfe/sdk-java.git</developerConnection>
-        <url>http://github.com/cloud-dfe/sdk-java/tree/master/sdk_cloud_dfe</url>
+        <url>http://github.com/cloud-dfe/sdk-java/tree/master/sdk-cloud-dfe</url>
     </scm>
 
     <properties>
