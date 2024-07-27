@@ -1,4 +1,4 @@
-package com.cloud_dfe;
+package io.github.sdk;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

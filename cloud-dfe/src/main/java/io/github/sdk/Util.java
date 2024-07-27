@@ -1,4 +1,4 @@
-package com.cloud_dfe;
+package io.github.sdk;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
