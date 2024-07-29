@@ -9,7 +9,7 @@
     <version>1.0.0</version>
 
     <name>SDK-cloud-dfe</name>
-    <description>SDK para integação com a api da integra notas</description>
+    <description>SDK para integração com a api da integra notas</description>
     <url>http://github.com/cloud-dfe/sdk-java</url>
 
     <licenses>
