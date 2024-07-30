@@ -11,27 +11,34 @@ import com.google.gson.JsonObject;
 public class AtmCancelaXml {
     public static void main(String[] args) throws IllegalAccessException, IOException {
         
-        int ambiente = Const.AMBIENTE_HOMOLOGACAO;
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbXAiOjQ2MSwidXNyIjoxNzAsInRwIjoyLCJpYXQiOjE2NTE1MDYzMjR9.a0cOwP6BUDZAboYwMzoMjutCtFM8Ph-X4pLahZIB_V4";
-        int timeout = 60;
+        try {
+            
+            int ambiente = Const.AMBIENTE_HOMOLOGACAO;
+            String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbXAiOjQ2MSwidXNyIjoxNzAsInRwIjoyLCJpYXQiOjE2NTE1MDYzMjR9.a0cOwP6BUDZAboYwMzoMjutCtFM8Ph-X4pLahZIB_V4";
+            int timeout = 60;
 
-        Averbacao averbacao = new Averbacao(ambiente, token, timeout, false);
+            Averbacao averbacao = new Averbacao(ambiente, token, timeout, false);
 
-        String fileXml = Util.readFile("caminho_do_arquivo.xml");
+            String fileXml = Util.readFile("caminho_do_arquivo.xml");
 
-        String fileXmlBase64 = Util.encode(fileXml);
-        
-        JsonObject payload = new JsonObject();
+            String fileXmlBase64 = Util.encode(fileXml);
+            
+            JsonObject payload = new JsonObject();
 
-        payload.addProperty("xml", fileXmlBase64); // Substitua "file_xml_base64" pelo valor real
-        payload.addProperty("usuario", "login");
-        payload.addProperty("senha", "senha");
-        payload.addProperty("codigo", "codigo");
-        payload.addProperty("chave", "");
+            payload.addProperty("xml", fileXmlBase64); // Substitua "file_xml_base64" pelo valor real
+            payload.addProperty("usuario", "login");
+            payload.addProperty("senha", "senha");
+            payload.addProperty("codigo", "codigo");
+            payload.addProperty("chave", "");
 
-        JsonObject resp = averbacao.atmCancela(payload);
+            JsonObject resp = averbacao.atmCancela(payload);
 
-        System.out.println(resp);
+            System.out.println(resp);
 
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            
+        }
     }
 }

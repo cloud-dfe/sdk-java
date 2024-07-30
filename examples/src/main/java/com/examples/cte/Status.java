@@ -1,7 +1,6 @@
 package com.examples.cte;
 
 import io.github.sdk.Const;
-import io.github.sdk.Util;
 import io.github.sdk.routes.Cte;
 
 import java.io.IOException;
@@ -17,6 +16,10 @@ public class Status {
         int timeout = 60;
 
         Cte cte = new Cte(ambiente, token, timeout, false);
+
+        JsonObject resp = cte.status();
+
+        System.out.println(resp);
 
     }
 

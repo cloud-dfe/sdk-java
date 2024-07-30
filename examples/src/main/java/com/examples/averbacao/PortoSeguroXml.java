@@ -11,28 +11,35 @@ import io.github.sdk.routes.Averbacao;
 public class PortoSeguroXml {
 
     public static void main(String[] args) throws IllegalAccessException, IOException {
-        
-        int ambiente = Const.AMBIENTE_HOMOLOGACAO;
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbXAiOjQ2MSwidXNyIjoxNzAsInRwIjoyLCJpYXQiOjE2NTE1MDYzMjR9.a0cOwP6BUDZAboYwMzoMjutCtFM8Ph-X4pLahZIB_V4";
-        int timeout = 60;
+    
+        try {
 
-        Averbacao averbacao = new Averbacao(ambiente, token, timeout, false);
+            int ambiente = Const.AMBIENTE_HOMOLOGACAO;
+            String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbXAiOjQ2MSwidXNyIjoxNzAsInRwIjoyLCJpYXQiOjE2NTE1MDYzMjR9.a0cOwP6BUDZAboYwMzoMjutCtFM8Ph-X4pLahZIB_V4";
+            int timeout = 60;
 
-        String fileXml = Util.readFile("caminho_do_arquivo.xml");
+            Averbacao averbacao = new Averbacao(ambiente, token, timeout, false);
 
-        String fileXmlBase64 = Util.encode(fileXml);
-        
-        JsonObject payload = new JsonObject();
+            String fileXml = Util.readFile("caminho_do_arquivo.xml");
 
-        payload.addProperty("xml", fileXmlBase64); // Substitua "file_xml_base64" pelo valor real
-        payload.addProperty("usuario", "login");
-        payload.addProperty("senha", "senha");
-        payload.addProperty("chave", "50000000000000000000000000000000000000000000");
+            String fileXmlBase64 = Util.encode(fileXml);
+            
+            JsonObject payload = new JsonObject();
 
-        JsonObject resp = averbacao.portoSeguro(payload);
+            payload.addProperty("xml", fileXmlBase64); // Substitua "file_xml_base64" pelo valor real
+            payload.addProperty("usuario", "login");
+            payload.addProperty("senha", "senha");
+            payload.addProperty("chave", "50000000000000000000000000000000000000000000");
 
-        System.out.println(resp);
+            JsonObject resp = averbacao.portoSeguro(payload);
+
+            System.out.println(resp);
+
+        }  catch (Exception e) {
+            
+            e.printStackTrace();
+            
+        }
 
     }
-
 }
