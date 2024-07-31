@@ -60,7 +60,7 @@ public class Mdfe extends Base{
     }
 
     public JsonObject abertos (JsonObject payload) {
-        return getClient().send("POST", "/mdfe/abertos", payload);
+        return getClient().send("GET", "/mdfe/abertos", null);
     }
 
     public JsonObject importa (JsonObject payload) {
