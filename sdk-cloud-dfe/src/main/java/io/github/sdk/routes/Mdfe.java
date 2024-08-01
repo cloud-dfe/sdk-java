@@ -17,7 +17,7 @@ public class Mdfe extends Base{
         return getClient().send("POST", "/mdfe/preview", payload);
     }
 
-    public JsonObject status (JsonObject payload) {
+    public JsonObject status () {
         return getClient().send("POST", "/mdfe/status", payload);
     }
 
