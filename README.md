@@ -6,8 +6,14 @@ Este SDK visa simplificar a integração do seu sistema com a nossa API, oferece
 
 ## Forma de instalação de nosso SDK:
 
+Adicionar nas do arquivo do arquivo de configuração de depedencia maven pom.xml 
+
 ```
-pip install sdk-cloud-dfe
+<dependency>
+    <groupId>io.github.cloud-dfe</groupId>
+    <artifactId>sdk-cloud-dfe</artifactId>
+    <version>x.x.x</version>
+</dependency>
 ```
 
 ## Forma de uso:
