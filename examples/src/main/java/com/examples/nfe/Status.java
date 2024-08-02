@@ -13,7 +13,7 @@ public class Status {
 
         try {
 
-            int ambiente = Const.AMBIENTE_HOMOLOGACAO;
+            int ambiente = Const.AMBIENTE_PRODUCAO;
             String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbXAiOjQ2MSwidXNyIjoxNzAsInRwIjoyLCJpYXQiOjE2NTE1MDYzMjR9.a0cOwP6BUDZAboYwMzoMjutCtFM8Ph-X4pLahZIB_V4";
             int timeout = 60;
 

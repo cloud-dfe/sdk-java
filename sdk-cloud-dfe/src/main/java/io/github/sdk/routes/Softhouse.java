@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 
 public class Softhouse extends Base {
 
-    protected Softhouse(int ambiente, String token, int timeout, boolean debug) throws IllegalAccessException {
+    public Softhouse(int ambiente, String token, int timeout, boolean debug) throws IllegalAccessException {
         super(ambiente, token, timeout, debug);
     }
 
