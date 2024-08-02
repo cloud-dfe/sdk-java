@@ -25,6 +25,65 @@ public class Cria {
 
             System.out.println(resp);
 
+            if (resp.get("codigo").getAsInt() == 200) {
+                
+                String chave = resp.get("chave").getAsString();
+                
+                if (resp.get("codigo").getAsInt() == 5023){
+
+                    Thread.sleep(5000);
+                    int tentativas = 1;
+
+                    while (tentativas <= 5) {
+                        
+                        JsonObject payloadConsulta = new JsonObject();
+                        payloadConsulta.addProperty("chave", chave);
+
+                        JsonObject respConsulta = nfse.consulta(payloadConsulta);
+
+                        if (respConsulta.get("codigo").getAsInt() != 5023) {
+                            if (respConsulta.get("sucesso").getAsBoolean()) {
+                                System.out.println(respConsulta);
+                                break;
+                            } else {
+                                System.out.println(respConsulta);
+                                break;
+                            }
+                        }
+
+                        Thread.sleep(5000);
+                        tentativas++;
+
+                    }
+                } else {
+                    System.out.println(resp);
+                }
+            
+            } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
+                System.out.println(resp.get("erro").getAsString());
+            
+            } else if (resp.get("codigo").getAsInt() == 5008 || resp.get("codigo").getAsInt() >= 7000) {
+                
+                String chave = resp.get("chave").getAsString();
+
+                JsonObject payloadConsulta = new JsonObject();
+
+                payloadConsulta.addProperty("chave", chave);
+
+                System.out.println(resp);
+
+                JsonObject respConsulta = nfse.consulta(payloadConsulta);
+
+                if (respConsulta.get("sucesso").getAsBoolean()) {
+                    System.out.println(respConsulta);
+                } else {
+                    System.out.println(respConsulta);
+                }
+            
+            } else {
+                System.out.println(resp);
+            }
+
         } catch (Exception e) {
 
             e.printStackTrace();

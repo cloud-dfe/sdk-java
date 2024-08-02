@@ -6,7 +6,7 @@
 
     <groupId>io.github.cloud-dfe</groupId>
     <artifactId>sdk-cloud-dfe</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>SDK-cloud-dfe</name>
     <description>SDK para integração com a api da integra notas</description>

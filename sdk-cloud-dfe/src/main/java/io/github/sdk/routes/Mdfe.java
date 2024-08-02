@@ -18,7 +18,7 @@ public class Mdfe extends Base{
     }
 
     public JsonObject status () {
-        return getClient().send("POST", "/mdfe/status", payload);
+        return getClient().send("POST", "/mdfe/status", null);
     }
 
     public JsonObject consulta (JsonObject payload) {
