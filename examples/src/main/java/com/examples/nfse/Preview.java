@@ -61,18 +61,22 @@ public class Preview {
         payload.add("tomador", tomador);
 
         JsonObject servico = new JsonObject();
-        servico.addProperty("codigo_tributacao_municipio", "10500");
-        servico.addProperty("discriminacao", "Exemplo Serviço");
         servico.addProperty("codigo_municipio", "4119905");
-        servico.addProperty("valor_servicos", "1.00");
-        servico.addProperty("valor_pis", "1.00");
-        servico.addProperty("valor_cofins", "1.00");
-        servico.addProperty("valor_inss", "1.00");
-        servico.addProperty("valor_ir", "1.00");
-        servico.addProperty("valor_csll", "1.00");
-        servico.addProperty("valor_outras", "1.00");
-        servico.addProperty("valor_aliquota", "1.00");
-        servico.addProperty("valor_desconto_incondicionado", "1.00");
+        
+        JsonObject itens = new JsonObject();
+        itens.addProperty("codigo_tributacao_municipio", "10500");
+        itens.addProperty("discriminacao", "Exemplo Serviço");
+        itens.addProperty("valor_servicos", "1.00");
+        itens.addProperty("valor_pis", "1.00");
+        itens.addProperty("valor_cofins", "1.00");
+        itens.addProperty("valor_inss", "1.00");
+        itens.addProperty("valor_ir", "1.00");
+        itens.addProperty("valor_csll", "1.00");
+        itens.addProperty("valor_outras", "1.00");
+        itens.addProperty("valor_aliquota", "1.00");
+        itens.addProperty("valor_desconto_incondicionado", "1.00");
+
+        servico.add("itens", itens);
 
         payload.add("servico", servico);
 
