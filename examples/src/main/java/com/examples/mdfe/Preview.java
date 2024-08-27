@@ -110,7 +110,7 @@ public class Preview {
         veiculo.add("condutores", condutores);
 
         modalRodoviario.add("veiculo", veiculo);
-        modalRodoviario.add("reboque", new JsonArray());
+        modalRodoviario.add("reboques", new JsonArray());
 
         payload.add("modal_rodoviario", modalRodoviario);
 
