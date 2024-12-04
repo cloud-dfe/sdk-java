@@ -29,6 +29,65 @@ public class Cria {
 
             System.out.println(resp);
 
+            if (resp.get("codigo").getAsInt() == 200) {
+
+                String chave = resp.get("chave").getAsString();
+
+                if (resp.get("codigo").getAsInt() == 5023) {
+
+                    Thread.sleep(5000);
+                    int tentativas = 1;
+
+                    while (tentativas <= 5) {
+
+                        JsonObject payloadConsulta = new JsonObject();
+                        payloadConsulta.addProperty("chave", chave);
+
+                        JsonObject respConsulta = nfcom.consulta(payloadConsulta);
+
+                        if (respConsulta.get("codigo").getAsInt() != 5023) {
+                            if (respConsulta.get("sucesso").getAsBoolean()) {
+                                System.out.println(respConsulta);
+                                break;
+                            } else {
+                                System.out.println(respConsulta);
+                                break;
+                            }
+                        }
+
+                        Thread.sleep(5000);
+                        tentativas++;
+
+                    }
+                } else {
+                    System.out.println(resp);
+                }
+
+            } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
+                System.out.println(resp.get("erro").getAsString());
+
+            } else if (resp.get("codigo").getAsInt() == 5008) {
+
+                String chave = resp.get("chave").getAsString();
+
+                JsonObject payloadConsulta = new JsonObject();
+
+                payloadConsulta.addProperty("chave", chave);
+
+                System.out.println(resp);
+
+                JsonObject respConsulta = nfcom.consulta(payloadConsulta);
+
+                if (respConsulta.get("sucesso").getAsBoolean()) {
+                    System.out.println(respConsulta);
+                } else {
+                    System.out.println(respConsulta);
+                }
+
+            } else {
+                System.out.println(resp);
+            }
+
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -39,7 +98,7 @@ public class Cria {
 
     private static JsonObject createPayload() {
         JsonObject payload = new JsonObject();
-    
+
         payload.addProperty("numero", "3");
         payload.addProperty("serie", "1");
         payload.addProperty("data_emissao", "2024-06-20T13:23:00-03:00");
@@ -47,7 +106,7 @@ public class Cria {
         payload.addProperty("tipo_faturamento", "0");
         payload.addProperty("indicador_prepago", "0");
         payload.addProperty("indicador_cessao_meios_rede", "0");
-    
+
         JsonObject destinatario = new JsonObject();
         destinatario.addProperty("nome", "HELIO WOLFF");
         destinatario.addProperty("cpf", "06844990960");
@@ -55,7 +114,7 @@ public class Cria {
         destinatario.addProperty("id_outros", "");
         destinatario.add("inscricao_estadual", null);
         destinatario.addProperty("indicador_inscricao_estadual", "9");
-    
+
         JsonObject endereco = new JsonObject();
         endereco.addProperty("logradouro", "LOJA");
         endereco.add("complemento", null);
@@ -69,10 +128,10 @@ public class Cria {
         endereco.addProperty("cep", "95783000");
         endereco.add("telefone", null);
         endereco.add("email", null);
-    
+
         destinatario.add("endereco", endereco);
         payload.add("destinatario", destinatario);
-    
+
         JsonObject assinante = new JsonObject();
         assinante.addProperty("codigo", "123");
         assinante.addProperty("tipo", "3");
@@ -82,28 +141,28 @@ public class Cria {
         assinante.addProperty("data_fim", "2022-01-01");
         assinante.add("numero_terminal", null);
         assinante.add("uf", null);
-    
+
         payload.add("assinante", assinante);
-    
+
         JsonArray itens = new JsonArray();
         payload.add("itens", itens);
-    
+
         JsonObject cobranca = new JsonObject();
         cobranca.addProperty("data_competencia", "2024-06-01");
         cobranca.addProperty("data_vencimento", "2024-06-30");
         cobranca.addProperty("codigo_barras", "19872982798277298279287298728278272872872");
-    
+
         payload.add("cobranca", cobranca);
-    
+
         payload.addProperty("informacoes_adicionais_contribuinte", "");
-    
+
         return payload;
     }
 
     private static JsonArray createListaItens() {
         JsonArray listaItens = new JsonArray();
         JsonObject item = new JsonObject();
-    
+
         item.addProperty("numero_item", "1");
         item.addProperty("codigo_produto", "123");
         item.addProperty("descricao", "LP 1MB");
@@ -117,7 +176,7 @@ public class Cria {
         item.addProperty("valor_bruto", "10.00");
         item.addProperty("indicador_devolucao", "0");
         item.addProperty("informacoes_adicionais", "teste");
-    
+
         JsonObject imposto = new JsonObject();
         JsonObject icms = new JsonObject();
         icms.addProperty("situacao_tributaria", "00");
@@ -125,16 +184,16 @@ public class Cria {
         icms.addProperty("aliquota", "18.00");
         icms.addProperty("valor", "1.80");
         imposto.add("icms", icms);
-    
+
         JsonObject fcp = new JsonObject();
         fcp.add("aliquota", null);
         fcp.add("valor", null);
         imposto.add("fcp", fcp);
-    
+
         item.add("imposto", imposto);
-    
+
         listaItens.add(item);
-    
+
         return listaItens;
     }
 

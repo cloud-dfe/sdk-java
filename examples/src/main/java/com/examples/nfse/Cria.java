@@ -26,16 +26,16 @@ public class Cria {
             System.out.println(resp);
 
             if (resp.get("codigo").getAsInt() == 200) {
-                
+
                 String chave = resp.get("chave").getAsString();
-                
-                if (resp.get("codigo").getAsInt() == 5023){
+
+                if (resp.get("codigo").getAsInt() == 5023) {
 
                     Thread.sleep(5000);
                     int tentativas = 1;
 
                     while (tentativas <= 5) {
-                        
+
                         JsonObject payloadConsulta = new JsonObject();
                         payloadConsulta.addProperty("chave", chave);
 
@@ -58,12 +58,12 @@ public class Cria {
                 } else {
                     System.out.println(resp);
                 }
-            
+
             } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
                 System.out.println(resp.get("erro").getAsString());
-            
-            } else if (resp.get("codigo").getAsInt() == 5008 || resp.get("codigo").getAsInt() >= 7000) {
-                
+
+            } else if (resp.get("codigo").getAsInt() == 5008) {
+
                 String chave = resp.get("chave").getAsString();
 
                 JsonObject payloadConsulta = new JsonObject();
@@ -79,7 +79,7 @@ public class Cria {
                 } else {
                     System.out.println(respConsulta);
                 }
-            
+
             } else {
                 System.out.println(resp);
             }
@@ -89,7 +89,7 @@ public class Cria {
             e.printStackTrace();
 
         }
-        
+
     }
 
     private static JsonObject createPayload() {
@@ -121,7 +121,7 @@ public class Cria {
 
         JsonObject servico = new JsonObject();
         servico.addProperty("codigo_municipio", "4119905");
-        
+
         JsonObject itens = new JsonObject();
         itens.addProperty("codigo_tributacao_municipio", "10500");
         itens.addProperty("discriminacao", "Exemplo Serviço");

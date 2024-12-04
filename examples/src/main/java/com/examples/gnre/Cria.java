@@ -13,7 +13,7 @@ public class Cria {
     public static void main(String[] args) throws IllegalAccessException, IOException {
 
         try {
-        
+
             int ambiente = Const.AMBIENTE_HOMOLOGACAO;
             String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbXAiOiJ0b2tlbl9leGVtcGxvIiwidXNyIjoidGsiLCJ0cCI6InRrIn0.Tva_viCMCeG3nkRYmi_RcJ6BtSzui60kdzIsuq5X-sQ";
             int timeout = 60;
@@ -27,16 +27,16 @@ public class Cria {
             System.out.println(resp);
 
             if (resp.get("codigo").getAsInt() == 200) {
-                
+
                 String chave = resp.get("chave").getAsString();
-                
-                if (resp.get("codigo").getAsInt() == 5023){
+
+                if (resp.get("codigo").getAsInt() == 5023) {
 
                     Thread.sleep(5000);
                     int tentativas = 1;
 
                     while (tentativas <= 5) {
-                        
+
                         JsonObject payloadConsulta = new JsonObject();
                         payloadConsulta.addProperty("chave", chave);
 
@@ -59,12 +59,12 @@ public class Cria {
                 } else {
                     System.out.println(resp);
                 }
-            
+
             } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
                 System.out.println(resp.get("erro").getAsString());
-            
-            } else if (resp.get("codigo").getAsInt() == 5008 || resp.get("codigo").getAsInt() >= 7000) {
-                
+
+            } else if (resp.get("codigo").getAsInt() == 5008) {
+
                 String chave = resp.get("chave").getAsString();
 
                 JsonObject payloadConsulta = new JsonObject();
@@ -80,15 +80,15 @@ public class Cria {
                 } else {
                     System.out.println(respConsulta);
                 }
-            
+
             } else {
                 System.out.println(resp);
             }
 
         } catch (Exception e) {
-                
+
             System.out.println(e.getMessage());
-    
+
         }
 
     }
@@ -154,7 +154,7 @@ public class Cria {
         payload.add("receitas", receitas);
 
         return payload;
-    
+
     }
 
 }

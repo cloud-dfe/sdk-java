@@ -30,16 +30,16 @@ public class Cria {
             System.out.println(resp);
 
             if (resp.get("codigo").getAsInt() == 200) {
-                
+
                 String chave = resp.get("chave").getAsString();
-                
-                if (resp.get("codigo").getAsInt() == 5023){
+
+                if (resp.get("codigo").getAsInt() == 5023) {
 
                     Thread.sleep(5000);
                     int tentativas = 1;
 
                     while (tentativas <= 5) {
-                        
+
                         JsonObject payloadConsulta = new JsonObject();
                         payloadConsulta.addProperty("chave", chave);
 
@@ -62,12 +62,12 @@ public class Cria {
                 } else {
                     System.out.println(resp);
                 }
-            
+
             } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
                 System.out.println(resp.get("erro").getAsString());
-            
-            } else if (resp.get("codigo").getAsInt() == 5008 || resp.get("codigo").getAsInt() >= 7000) {
-                
+
+            } else if (resp.get("codigo").getAsInt() == 5008) {
+
                 String chave = resp.get("chave").getAsString();
 
                 JsonObject payloadConsulta = new JsonObject();
@@ -83,17 +83,17 @@ public class Cria {
                 } else {
                     System.out.println(respConsulta);
                 }
-            
+
             } else {
                 System.out.println(resp);
             }
-            
+
         } catch (Exception e) {
 
             e.printStackTrace();
 
         }
-            
+
     }
 
     private static JsonObject createPayload() {
@@ -173,7 +173,8 @@ public class Cria {
         pagamento.add("formas_pagamento", formasPagamento);
         payload.add("pagamento", pagamento);
 
-        payload.addProperty("informacoes_adicionais_contribuinte", "PV: 3325 * Rep: DIRETO * Motorista:  * Forma Pagto: 04 DIAS * teste de observação para a nota fiscal * Valor aproximado tributos R$9,43 (4,20%) Fonte: IBPT");
+        payload.addProperty("informacoes_adicionais_contribuinte",
+                "PV: 3325 * Rep: DIRETO * Motorista:  * Forma Pagto: 04 DIAS * teste de observação para a nota fiscal * Valor aproximado tributos R$9,43 (4,20%) Fonte: IBPT");
 
         JsonArray pessoasAutorizadas = new JsonArray();
         JsonObject pessoa1 = new JsonObject();
