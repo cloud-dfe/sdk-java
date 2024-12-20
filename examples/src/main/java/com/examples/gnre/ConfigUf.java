@@ -21,7 +21,7 @@ public class ConfigUf {
 
             JsonObject payload = new JsonObject();
 
-            payload.addProperty("uf_favoverida", "SP");
+            payload.addProperty("uf_favorecida", "SP");
             payload.addProperty("codigo_receita", (String) null);
             payload.addProperty("curier", (String) null);
 
