@@ -26,118 +26,48 @@ public class Cria {
 
             System.out.println(resp);
 
-            if (resp.get("codigo").getAsInt() == 200) {
+            if (resp.get("sucesso").getAsBoolean()) {
+                String chave = resp.get("chave").getAsString();
+                
+                Thread.sleep(5000);
 
+                int tentativas = 1;
+                while (tentativas <= 5) {
+                    JsonObject payloadC = new JsonObject();
+                    payloadC.addProperty("chave", chave);
+
+                    JsonObject respC = cte.consulta(payloadC);
+
+                    if (respC.get("codigo").getAsInt() != 5023) {
+                        if (respC.get("sucesso").getAsBoolean()) {
+                            System.out.println(respC);
+                            break;
+                        } else {
+                            System.out.println(respC);
+                            break;
+                        }
+                    }
+                    Thread.sleep(30000);
+                    tentativas++;
+                }
+            } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
+                System.out.println(resp);
+            } else if (resp.get("codigo").getAsInt() == 5008) {
                 String chave = resp.get("chave").getAsString();
 
-                if (resp.get("codigo").getAsInt() == 5023) {
+                JsonObject payloadC = new JsonObject();
+                payloadC.addProperty("chave", chave);
 
-                    Thread.sleep(5000);
-                    int tentativas = 1;
+                JsonObject respC = cte.consulta(payloadC);
 
-                    while (tentativas <= 5) {
-
-                        JsonObject payloadConsulta = new JsonObject();
-                        payloadConsulta.addProperty("chave", chave);
-
-                        JsonObject respConsulta = cte.consulta(payloadConsulta);
-
-                        if (respConsulta.get("codigo").getAsInt() != 5023) {
-                            if (respConsulta.get("sucesso").getAsBoolean()) {
-                                System.out.println(respConsulta);
-                                break;
-                            } else {
-                                System.out.println(respConsulta);
-                                break;
-                            }
-                        }
-
-                        Thread.sleep(5000);
-                        tentativas++;
-
+                if (respC.get("codigo").getAsInt() != 5023) {
+                    if (respC.get("sucesso").getAsBoolean()) {
+                        System.out.println(respC);
+                    } else {
+                        System.out.println(respC);
                     }
                 } else {
-                    System.out.println(resp);
-                }
-
-            } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
-                System.out.println(resp.get("erro").getAsString());
-
-            } else if (resp.get("codigo").getAsInt() == 5008) {
-
-                String chave = resp.get("chave").getAsString();
-
-                JsonObject payloadConsulta = new JsonObject();
-
-                payloadConsulta.addProperty("chave", chave);
-
-                System.out.println(resp);
-
-                JsonObject respConsulta = cte.consulta(payloadConsulta);
-
-                if (respConsulta.get("sucesso").getAsBoolean()) {
-                    System.out.println(respConsulta);
-                } else {
-                    System.out.println(respConsulta);
-                }
-
-            } else {
-                System.out.println(resp);
-            }
-
-            if (resp.get("codigo").getAsInt() == 200) {
-
-                String chave = resp.get("chave").getAsString();
-
-                if (resp.get("codigo").getAsInt() == 5023) {
-
-                    Thread.sleep(5000);
-                    int tentativas = 1;
-
-                    while (tentativas <= 5) {
-
-                        JsonObject payloadConsulta = new JsonObject();
-                        payloadConsulta.addProperty("chave", chave);
-
-                        JsonObject respConsulta = cte.consulta(payloadConsulta);
-
-                        if (respConsulta.get("codigo").getAsInt() != 5023) {
-                            if (respConsulta.get("sucesso").getAsBoolean()) {
-                                System.out.println(respConsulta);
-                                break;
-                            } else {
-                                System.out.println(respConsulta);
-                                break;
-                            }
-                        }
-
-                        Thread.sleep(5000);
-                        tentativas++;
-
-                    }
-                } else {
-                    System.out.println(resp);
-                }
-
-            } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
-                System.out.println(resp.get("erro").getAsString());
-
-            } else if (resp.get("codigo").getAsInt() == 5008) {
-
-                String chave = resp.get("chave").getAsString();
-
-                JsonObject payloadConsulta = new JsonObject();
-
-                payloadConsulta.addProperty("chave", chave);
-
-                System.out.println(resp);
-
-                JsonObject respConsulta = cte.consulta(payloadConsulta);
-
-                if (respConsulta.get("sucesso").getAsBoolean()) {
-                    System.out.println(respConsulta);
-                } else {
-                    System.out.println(respConsulta);
+                    System.out.println(respC);
                 }
 
             } else {

@@ -26,6 +26,61 @@ public class Cria {
 
             System.out.println(resp);
 
+            if (resp.has("sucesso") && resp.get("sucesso").getAsBoolean()) {
+                if (resp.has("codigo") && resp.get("codigo").getAsInt() == 2) {
+                    // Offline
+                    System.out.println("Documento offline. Aguarde a notificação.");
+                } else {
+                    // Autorizado
+                    System.out.println("Documento autorizado: " + resp);
+                }
+            } else if (resp.has("codigo") && 
+                       (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002)) {
+                // Erro nos campos
+                if (resp.has("erros")) {
+                    System.out.println("Erro nos campos: " + resp.get("erros"));
+                } else {
+                    System.out.println("Erro nos campos, mas sem detalhes disponíveis.");
+                }
+            } else if (resp.has("codigo") &&
+                       (resp.get("codigo").getAsInt() == 5008 || resp.get("codigo").getAsInt() >= 7000)) {
+                // Problemas de comunicação ou chave pendente
+                String chave = resp.has("chave") ? resp.get("chave").getAsString() : null;
+        
+                if (chave == null || chave.isEmpty()) {
+                    System.out.println("Chave não encontrada no response.");
+                    return;
+                }
+        
+                System.out.println("Problemas de comunicação ou chave pendente: " + resp);
+        
+                // Consulta pela chave
+                JsonObject payloadConsulta = new JsonObject();
+                payloadConsulta.addProperty("chave", chave);
+        
+                try {
+                    JsonObject respConsulta = mdfe.consulta(payloadConsulta);
+        
+                    if (respConsulta.has("codigo") && respConsulta.get("codigo").getAsInt() != 5023) {
+                        if (respConsulta.has("sucesso") && respConsulta.get("sucesso").getAsBoolean()) {
+                            // Autorizado
+                            System.out.println("Documento autorizado após consulta: " + respConsulta);
+                        } else {
+                            // Rejeição
+                            System.out.println("Documento rejeitado após consulta: " + respConsulta);
+                        }
+                    } else {
+                        // Em processamento
+                        System.out.println("Documento em processamento: " + respConsulta);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Erro ao consultar documento: " + e.getMessage());
+                }
+            } else {
+                // Rejeição
+                System.out.println("Documento rejeitado: " + resp);
+            }
+
         } catch (Exception e) {
 
             e.printStackTrace();

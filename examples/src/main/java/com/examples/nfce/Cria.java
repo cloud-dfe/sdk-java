@@ -29,6 +29,61 @@ public class Cria {
 
             System.out.println(resp);
 
+            if (resp.has("sucesso") && resp.get("sucesso").getAsBoolean()) {
+                if (resp.has("codigo") && resp.get("codigo").getAsInt() == 2) {
+                    // Offline
+                    System.out.println("Nota emitida offline. Aguarde a sincronização.");
+                } else {
+                    // Autorizado
+                    System.out.println("Nota autorizada com sucesso: " + resp);
+                }
+            } else if (resp.has("codigo") &&
+                       (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002)) {
+                // Erro nos campos
+                if (resp.has("erros")) {
+                    System.out.println("Erro nos campos: " + resp.get("erros"));
+                } else {
+                    System.out.println("Erro nos campos, mas sem detalhes fornecidos.");
+                }
+            } else if (resp.has("codigo") &&
+                       (resp.get("codigo").getAsInt() == 5008 || resp.get("codigo").getAsInt() >= 7000)) {
+                // Problemas de comunicação ou chave pendente
+                String chave = resp.has("chave") ? resp.get("chave").getAsString() : null;
+        
+                if (chave == null || chave.isEmpty()) {
+                    System.out.println("Chave não encontrada no response.");
+                    return;
+                }
+        
+                System.out.println("Problemas de comunicação ou chave pendente: " + resp);
+        
+                // Consulta pela chave
+                JsonObject payloadConsulta = new JsonObject();
+                payloadConsulta.addProperty("chave", chave);
+        
+                try {
+                    JsonObject respConsulta = nfce.consulta(payloadConsulta);
+        
+                    if (respConsulta.has("codigo") && respConsulta.get("codigo").getAsInt() != 5023) {
+                        if (respConsulta.has("sucesso") && respConsulta.get("sucesso").getAsBoolean()) {
+                            // Autorizado
+                            System.out.println("Nota autorizada após consulta: " + respConsulta);
+                        } else {
+                            // Rejeição
+                            System.out.println("Nota rejeitada após consulta: " + respConsulta);
+                        }
+                    } else {
+                        // Em processamento
+                        System.out.println("Nota em processamento: " + respConsulta);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Erro ao consultar NFC-e: " + e.getMessage());
+                }
+            } else {
+                // Rejeição
+                System.out.println("Nota rejeitada: " + resp);
+            }
+
         } catch (Exception e) {
 
             e.printStackTrace();
