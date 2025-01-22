@@ -85,4 +85,9 @@ public class Nfe extends Base {
         return getClient().send("POST", "/nfe/cadastro", payload);
     }
 
+    public JsonObject simples (JsonObject payload) {
+        String key = checkKey(payload);
+        return getClient().send("GET", "/nfe/pdf/simples/"+key, null);
+    }
+
 }
