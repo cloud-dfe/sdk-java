@@ -31,27 +31,25 @@ public class Cria {
 
             if (resp.get("sucesso").getAsBoolean()) {
                 String chave = resp.get("chave").getAsString();
+                JsonObject payloadC = new JsonObject();
+                payloadC.addProperty("chave", chave);
                 
-                Thread.sleep(5000);
+                Thread.sleep(15000);
 
-                int tentativas = 1;
-                while (tentativas <= 5) {
-                    JsonObject payloadC = new JsonObject();
-                    payloadC.addProperty("chave", chave);
-
-                    JsonObject respC = nfcom.consulta(payloadC);
-
-                    if (respC.get("codigo").getAsInt() != 5023) {
-                        if (respC.get("sucesso").getAsBoolean()) {
-                            System.out.println(respC);
-                            break;
-                        } else {
-                            System.out.println(respC);
-                            break;
-                        }
+                JsonObject respC = nfcom.consulta(payloadC);
+                
+                if (respC.get("codigo").getAsInt() != 5023) {
+                    if (respC.get("sucesso").getAsBoolean()) {
+                        // autorizado        
+                        System.out.println(respC);
+                    } else {
+                        // rejeição
+                        System.out.println(respC);
                     }
-                    Thread.sleep(30000);
-                    tentativas++;
+                } else {
+                    // nota em processamento
+                    // recomendamos que seja utilizado o metodo de consulta manual ou o webhook
+                    System.out.println(respC);
                 }
             } else if (resp.get("codigo").getAsInt() == 5001 || resp.get("codigo").getAsInt() == 5002) {
                 System.out.println(resp);
