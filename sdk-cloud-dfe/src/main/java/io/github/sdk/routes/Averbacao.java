@@ -9,6 +9,10 @@ public class Averbacao extends Base {
         super(ambiente, token, timeout, debug);
     }
 
+    public Averbacao(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject atm (JsonObject payload) {
         return getClient().send("POST", "/averbacao/atm", payload);
     }

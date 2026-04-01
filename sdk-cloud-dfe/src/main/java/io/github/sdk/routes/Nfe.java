@@ -9,6 +9,10 @@ public class Nfe extends Base {
         super(ambiente, token, timeout, debug);
     }
 
+    public Nfe(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject cria (JsonObject payload) {
         return getClient().send("POST", "/nfe", payload);
     }

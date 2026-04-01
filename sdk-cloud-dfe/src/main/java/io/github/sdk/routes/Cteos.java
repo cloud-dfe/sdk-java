@@ -9,6 +9,10 @@ public class Cteos extends Base{
         super(ambiente, token, timeout, debug);
     }
 
+    public Cteos(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject status () {
         return getClient().send("GET", "/cteos/status", null);
     }

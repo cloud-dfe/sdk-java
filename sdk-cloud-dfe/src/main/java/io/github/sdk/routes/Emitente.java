@@ -9,6 +9,10 @@ public class Emitente extends Base{
         super(ambiente, token, timeout, debug);
     }
 
+    public Emitente(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject token () {
         return getClient().send("GET", "/emitente/token", null);
     }

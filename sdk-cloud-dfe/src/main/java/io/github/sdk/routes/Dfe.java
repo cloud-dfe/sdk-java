@@ -9,6 +9,10 @@ public class Dfe extends Base{
         super(ambiente, token, timeout, debug);
     }
 
+    public Dfe(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject buscaCte (JsonObject payload) {
         return getClient().send("POST", "/dfe/cte", payload);
     }

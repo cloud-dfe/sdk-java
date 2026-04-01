@@ -9,6 +9,10 @@ public class Certificado extends Base{
         super(ambiente, token, timeout, debug);
     }
 
+    public Certificado(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject atualiza (JsonObject payload) {
         return getClient().send("POST", "/certificado", payload);
     }

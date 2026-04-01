@@ -5,19 +5,25 @@ import com.google.gson.JsonObject;
 public abstract class Base {
 
     private final int ambiente;
+    private final int apiVersion;
     private final String token;
     private final int timeout;
     private final boolean debug;
     private final Client client;
 
     protected Base(int ambiente, String token, int timeout, boolean debug) throws IllegalAccessException {
+        this(ambiente, token, timeout, debug, Const.API_VERSAO_PADRAO);
+    }
+
+    protected Base(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
         this.ambiente = ambiente;
+        this.apiVersion = apiVersion;
         this.token = token;
         this.timeout = timeout;
         this.debug = debug;
 
         try {
-            this.client = new Client(this.ambiente, this.token, this.timeout, this.debug);
+            this.client = new Client(this.ambiente, this.token, this.timeout, this.debug, this.apiVersion);
         } catch (IllegalAccessException e) {
             throw new IllegalAccessException("Não foi possível instanciar a classe Client.");
         }
@@ -25,6 +31,10 @@ public abstract class Base {
 
     public int getAmbiente() {
         return ambiente;
+    }
+
+    public int getApiVersion() {
+        return apiVersion;
     }
 
     public String getToken() {

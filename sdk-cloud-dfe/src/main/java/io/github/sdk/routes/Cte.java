@@ -9,6 +9,10 @@ public class Cte extends Base{
         super(ambiente, token, timeout, debug);
     }
 
+    public Cte(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject status () {
         return getClient().send("GET", "/cte/status", null);
     }

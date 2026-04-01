@@ -9,6 +9,10 @@ public class Softhouse extends Base {
         super(ambiente, token, timeout, debug);
     }
 
+    public Softhouse(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject criaEmitente(JsonObject payload) {
         return getClient().send("POST", "/soft/emitente", payload);
     }

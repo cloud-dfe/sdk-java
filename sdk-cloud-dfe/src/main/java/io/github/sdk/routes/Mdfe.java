@@ -9,6 +9,10 @@ public class Mdfe extends Base{
         super(ambiente, token, timeout, debug);
     }
 
+    public Mdfe(int ambiente, String token, int timeout, boolean debug, int apiVersion) throws IllegalAccessException {
+        super(ambiente, token, timeout, debug, apiVersion);
+    }
+
     public JsonObject cria (JsonObject payload) {
         return getClient().send("POST", "/mdfe", payload);
     }
