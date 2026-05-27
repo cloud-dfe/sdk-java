@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 
 public class Service {
@@ -17,7 +18,7 @@ public class Service {
     private final int timeout;
     private final boolean debug;
 
-    public Service (String baseUri, String token, int timeout, boolean debug) {
+    public Service(String baseUri, String token, int timeout, boolean debug) {
         this.baseUri = baseUri;
         this.token = token;
         this.timeout = timeout * 1000;
@@ -47,12 +48,12 @@ public class Service {
 
             String url = baseUri + route;
 
-            URL obj = new URL(url);
+            URL obj = URI.create(url).toURL();
 
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
             con.setRequestMethod(method);
-            
+
             con.setRequestProperty("Authorization", token);
             con.setRequestProperty("Accept", "application/json");
             con.setRequestProperty("Content-Type", "application/json");
@@ -89,7 +90,7 @@ public class Service {
             resp = new Gson().fromJson(response.toString(), JsonObject.class);
 
         } catch (Exception e) {
-         
+
             e.printStackTrace();
 
         }
