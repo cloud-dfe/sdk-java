@@ -20,7 +20,7 @@ public class Cancela {
             Ciot ciot = new Ciot(ambiente, token, timeout, false);
 
             JsonObject payload = new JsonObject();
-            payload.addProperty("identificacao", "VIAGEM-0001");
+            payload.addProperty("chave", "41261122333444000181927090000010011360347860");
             payload.addProperty("justificativa", "Viagem cancelada pelo contratante");
 
             JsonObject resp = ciot.cancela(payload);

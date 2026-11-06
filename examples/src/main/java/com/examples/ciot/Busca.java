@@ -20,6 +20,8 @@ public class Busca {
             Ciot ciot = new Ciot(ambiente, token, timeout, false);
 
             JsonObject payload = new JsonObject();
+            payload.addProperty("numero_inicial", "1");
+            payload.addProperty("numero_final", "1999");
             payload.addProperty("data_inicial", "2026-11-01");
             payload.addProperty("data_final", "2026-11-30");
             payload.addProperty("situacao", "ABERTO");

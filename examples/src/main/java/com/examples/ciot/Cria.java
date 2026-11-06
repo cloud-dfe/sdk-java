@@ -21,7 +21,8 @@ public class Cria {
             Ciot ciot = new Ciot(ambiente, token, timeout, false);
 
             JsonObject payload = new JsonObject();
-            payload.addProperty("identificacao", "VIAGEM-0001");
+            payload.addProperty("numero", "1001");
+            payload.addProperty("identificacao", "PEDIDO-77");
             payload.addProperty("tipo_operacao", "1");
             payload.addProperty("data_inicio", "2026-11-10");
             payload.addProperty("data_fim", "2026-11-12");
@@ -91,7 +92,7 @@ public class Cria {
 
             if (resp.get("sucesso").getAsBoolean()) {
                 if (resp.get("codigo").getAsInt() == 5023) {
-                    // lote em processamento: consultar pela identificação ou esperar o webhook
+                    // lote em processamento: consultar pela chave ou esperar o webhook
                 } else {
                     // CIOT declarado
                 }

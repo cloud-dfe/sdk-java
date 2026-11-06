@@ -20,7 +20,7 @@ public class Encerra {
             Ciot ciot = new Ciot(ambiente, token, timeout, false);
 
             JsonObject payload = new JsonObject();
-            payload.addProperty("identificacao", "VIAGEM-0001");
+            payload.addProperty("chave", "41261122333444000181927090000010011360347860");
             JsonObject carga = new JsonObject();
             carga.addProperty("tipo", "05");
             carga.addProperty("natureza", "8414");

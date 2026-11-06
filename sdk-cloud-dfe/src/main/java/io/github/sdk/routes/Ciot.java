@@ -18,8 +18,8 @@ public class Ciot extends Base{
     }
 
     public JsonObject consulta (JsonObject payload) {
-        String identificacao = checkIdentificacao(payload);
-        return getClient().send("GET", "/ciot/"+identificacao, null);
+        String key = checkKey(payload);
+        return getClient().send("GET", "/ciot/"+key, null);
     }
 
     public JsonObject busca (JsonObject payload) {
@@ -39,22 +39,12 @@ public class Ciot extends Base{
     }
 
     public JsonObject pdf (JsonObject payload) {
-        String identificacao = checkIdentificacao(payload);
-        return getClient().send("GET", "/ciot/pdf/"+identificacao, null);
+        String key = checkKey(payload);
+        return getClient().send("GET", "/ciot/pdf/"+key, null);
     }
 
     public JsonObject transportador (JsonObject payload) {
         return getClient().send("POST", "/ciot/transportador", payload);
     }
 
-    // o CIOT é identificado pela identificação informada na criação, não por chave de acesso
-    public String checkIdentificacao(JsonObject payload) {
-        String identificacao = payload.has("identificacao") && !payload.get("identificacao").isJsonNull()
-            ? payload.get("identificacao").getAsString().trim()
-            : "";
-        if (!identificacao.matches("^[A-Za-z0-9._-]{1,40}$")) {
-            throw new IllegalArgumentException("A identificação do CIOT deve ter de 1 a 40 caracteres: letras, números, ponto, hífen ou sublinhado.");
-        }
-        return identificacao;
-    }
 }

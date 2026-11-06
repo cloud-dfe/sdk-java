@@ -21,7 +21,7 @@ public class Retifica {
             Ciot ciot = new Ciot(ambiente, token, timeout, false);
 
             JsonObject payload = new JsonObject();
-            payload.addProperty("identificacao", "VIAGEM-0001");
+            payload.addProperty("chave", "41261122333444000181927090000010011360347860");
             payload.addProperty("data_fim", "2026-11-13");
             payload.addProperty("valor_frete", "4800.00");
             JsonArray pagamentos = new JsonArray();
