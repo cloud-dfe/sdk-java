@@ -14,37 +14,37 @@ public class Ciot extends Base{
     }
 
     public JsonObject cria (JsonObject payload) {
-        return getClient().send("POST", "/ciot", payload);
+        return getClient().send("POST", "/ciot/ailog", payload);
     }
 
     public JsonObject consulta (JsonObject payload) {
         String key = checkKey(payload);
-        return getClient().send("GET", "/ciot/"+key, null);
+        return getClient().send("GET", "/ciot/ailog/"+key, null);
     }
 
     public JsonObject busca (JsonObject payload) {
-        return getClient().send("POST", "/ciot/busca", payload);
+        return getClient().send("POST", "/ciot/ailog/busca", payload);
     }
 
     public JsonObject cancela (JsonObject payload) {
-        return getClient().send("POST", "/ciot/cancela", payload);
+        return getClient().send("POST", "/ciot/ailog/cancela", payload);
     }
 
     public JsonObject encerra (JsonObject payload) {
-        return getClient().send("POST", "/ciot/encerra", payload);
+        return getClient().send("POST", "/ciot/ailog/encerra", payload);
     }
 
     public JsonObject retifica (JsonObject payload) {
-        return getClient().send("POST", "/ciot/retifica", payload);
+        return getClient().send("POST", "/ciot/ailog/retifica", payload);
     }
 
     public JsonObject pdf (JsonObject payload) {
         String key = checkKey(payload);
-        return getClient().send("GET", "/ciot/pdf/"+key, null);
+        return getClient().send("GET", "/ciot/ailog/pdf/"+key, null);
     }
 
     public JsonObject transportador (JsonObject payload) {
-        return getClient().send("POST", "/ciot/transportador", payload);
+        return getClient().send("POST", "/ciot/ailog/transportador", payload);
     }
 
 }
