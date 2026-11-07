@@ -72,6 +72,8 @@ Para saber os detalhes referente ao dados de envio e os retornos consulte nossa 
 
 [CIOT](https://github.com/cloud-dfe/sdk-java/tree/master/examples/src/main/java/com/examples/ciot)
 
+[VPO](https://github.com/cloud-dfe/sdk-java/tree/master/examples/src/main/java/com/examples/vpo)
+
 [CT-e](https://github.com/cloud-dfe/sdk-java/tree/master/examples/src/main/java/com/examples/cte)
 
 [CT-e OS](https://github.com/cloud-dfe/sdk-java/tree/master/examples/src/main/java/com/examples/cteos)
